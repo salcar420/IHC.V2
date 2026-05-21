@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>AirTheremin Colaborativo - Proyecto 7</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>AirTheremin</h1>
+        <div class="controls">
+            <button id="startBtn">Instrumento Listo</button>
+            <button id="modeBtn" style="background-color: #28a745; color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; margin-left: 10px;">Modo: SOLO</button>
+        </div>
+        <div class="canvas-container">
+            <video id="input_video" hidden></video>
+            <canvas id="output_canvas" width="800" height="500"></canvas>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
