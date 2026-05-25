@@ -58,3 +58,116 @@ h1 {
     color: #888;
     font-size: 0.9em;
 }
+
+.tutorial-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(15, 25, 50, 0.92);
+    color: white;
+    padding: 25px 35px;
+    border-radius: 15px;
+    border: 2px solid #e94560;
+    z-index: 100;
+    max-width: 480px;
+    text-align: left;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.tutorial-overlay h2 {
+    margin: 0 0 15px 0;
+    color: #e94560;
+    text-align: center;
+}
+
+.tutorial-overlay ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.tutorial-overlay li {
+    margin: 10px 0;
+    font-size: 15px;
+    transition: all 0.4s;
+    padding-left: 24px;
+    position: relative;
+}
+
+.tutorial-overlay li::before {
+    content: "○";
+    position: absolute;
+    left: 0;
+    color: #888;
+}
+
+.tutorial-overlay li.completado {
+    color: #28a745;
+    opacity: 0.7;
+}
+
+.tutorial-overlay li.completado::before {
+    content: "✓";
+    color: #28a745;
+    font-weight: bold;
+}
+
+#tutorialSkip {
+    display: block;
+    margin: 0 auto;
+    padding: 6px 18px;
+    background: transparent;
+    color: #aaa;
+    border: 1px solid #555;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+#tutorialSkip:hover {
+    color: white;
+    border-color: #e94560;
+}
+
+.escala-select {
+    padding: 12px 18px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+}
+
+.leccion-btn {
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+
+.leccion-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #9b59b6;
+}
+
+.leccion-btn.activo {
+    background-color: #e74c3c;
+}
+
+.cancion-select {
+    padding: 12px 18px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+    background-color: #34495e;
+    color: white;
+    border: none;
+}

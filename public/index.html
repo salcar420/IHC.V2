@@ -18,10 +18,47 @@
         <div class="controls">
             <button id="startBtn">Instrumento Listo</button>
             <button id="modeBtn" style="background-color: #28a745; color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; margin-left: 10px;">Modo: SOLO</button>
+            <select id="instrumentoSel" style="padding: 12px 18px; border-radius: 30px; font-weight: bold; cursor: pointer; margin-left: 10px; background-color: #0f3460; color: white; border: none;">
+                <optgroup label="Sintetizados (continuos)">
+                    <option value="theremin">Theremin</option>
+                    <option value="bajo">Bajo synth</option>
+                    <option value="campana">Campana FM</option>
+                </optgroup>
+                <optgroup label="Reales (por notas)">
+                    <option value="piano">Piano</option>
+                    <option value="guitarra">Guitarra acústica</option>
+                </optgroup>
+            </select>
+            <select id="escalaSel" class="escala-select">
+                <option value="cromatica">Escala: Libre</option>
+                <option value="pentatonica">Escala: Pentatónica</option>
+                <option value="mayor">Escala: Do Mayor</option>
+                <option value="menor">Escala: La Menor</option>
+                <option value="blues">Escala: Blues</option>
+            </select>
+        </div>
+        <div class="controls" style="margin-top: 8px;">
+            <button id="leccionBtn" class="leccion-btn">🎓 Iniciar Lección</button>
+            <select id="cancionSel" class="cancion-select">
+                <option value="twinkle">Estrellita</option>
+                <option value="mary">Mary Had a Little Lamb</option>
+                <option value="alegria">Himno a la Alegría</option>
+                <option value="cumpleanos">Cumpleaños Feliz</option>
+            </select>
         </div>
         <div class="canvas-container">
             <video id="input_video" hidden></video>
             <canvas id="output_canvas" width="800" height="500"></canvas>
+            <div id="tutorial" class="tutorial-overlay">
+                <h2>Bienvenido al AirTheremin</h2>
+                <ul>
+                    <li id="tut-paso-1"><strong>Enciende el instrumento</strong> con el botón "Instrumento Listo"</li>
+                    <li id="tut-paso-2"><strong>Pellizca</strong> con índice y pulgar para tocar una nota</li>
+                    <li id="tut-paso-3"><strong>Mueve la mano izquierda-derecha</strong> para cambiar de nota</li>
+                    <li id="tut-paso-4"><strong>Abre la mano</strong> (pulgar al meñique) para subir el volumen</li>
+                </ul>
+                <button id="tutorialSkip">Saltar tutorial</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
