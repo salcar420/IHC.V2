@@ -49,7 +49,8 @@ h1 {
 }
 
 #output_canvas {
-    transform: scaleX(-1); /* Efecto espejo para IHC */
+    /* El espejo se controla en JS (variable `espejo` + botón Espejo ON/OFF).
+       NO poner transform: scaleX(-1) aquí: volteaba también el texto/HUD. */
     display: block;
 }
 
@@ -170,4 +171,94 @@ h1 {
     background-color: #34495e;
     color: white;
     border: none;
+}
+
+/* === Botón "pill" reutilizable (antes eran estilos inline duplicados) === */
+.btn-pill {
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+.btn-pill:hover { transform: scale(1.05); }
+.btn-green  { background-color: #28a745; }
+.btn-blue   { background-color: #0f3460; }
+.btn-red    { background-color: #e94560; }
+.btn-slate  { background-color: #34495e; }
+
+/* Pista del modo teclado */
+.hint {
+    margin-top: 12px;
+    color: #c8c8c8;          /* contraste AA sobre el fondo oscuro */
+    font-size: 0.9em;
+}
+.hint kbd {
+    background: #0f3460;
+    border-radius: 5px;
+    padding: 1px 7px;
+    border: 1px solid #2a4a7a;
+    font-family: monospace;
+}
+
+/* === Modal SEQ (Single Ease Question) === */
+.seq-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+.seq-box {
+    background: #16213e;
+    border: 2px solid #00ff78;
+    border-radius: 16px;
+    padding: 26px 30px;
+    text-align: center;
+    max-width: 460px;
+}
+.seq-q { font-size: 18px; margin: 0 0 18px; color: #ffffff; }
+.seq-row { display: flex; gap: 8px; justify-content: center; }
+.seq-row button {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #0f3460;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.seq-row button:hover { background: #00ff78; color: #16213e; transform: scale(1.1); }
+.seq-legend {
+    display: flex;
+    justify-content: space-between;
+    color: #c8c8c8;
+    font-size: 12px;
+    margin: 10px 4px 16px;
+}
+.seq-skip {
+    background: transparent;
+    color: #c8c8c8;
+    border: 1px solid #555;
+    border-radius: 20px;
+    padding: 6px 18px;
+    cursor: pointer;
+}
+.seq-skip:hover { color: white; border-color: #00ff78; }
+
+/* Mejor contraste del botón de saltar tutorial (era #aaa, bajo en AA) */
+#tutorialSkip { color: #c8c8c8; }
+
+/* === Accesibilidad: respetar reduce-motion (vestibular / epilepsia) === */
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+    .btn-pill:hover, .leccion-btn:hover, #startBtn:hover, .seq-row button:hover { transform: none; }
 }

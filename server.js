@@ -14,7 +14,19 @@ const io = new Server(server);
 // 1. Exponer la carpeta 'public' al navegador
 app.use(express.static('public'));
 
+// Health endpoint para verificar el servidor con un curl antes de exponer/tunelizar
+app.get('/health', (req, res) => {
+    const enSala = io.sockets.adapter.rooms.get(NOMBRE_SALA)?.size || 0;
+    res.json({ ok: true, enSala, max: 3, uptime: process.uptime() });
+});
+
 const NOMBRE_SALA = 'sala_principal';
+
+// Acota un número al rango [min, max]; descarta no-numéricos.
+const clamp = (n, min, max) => {
+    const v = Number(n);
+    return Number.isFinite(v) ? Math.min(max, Math.max(min, v)) : min;
+};
 
 // 2. Lógica de WebSockets (Tiempo real)
 io.on('connection', (socket) => {
@@ -43,7 +55,18 @@ io.on('connection', (socket) => {
     });
 
     socket.on('datos_theremin', (datos) => {
-        socket.to(NOMBRE_SALA).emit('datos_companeros', datos);
+        // No retransmitir si el emisor no está realmente en la sala
+        if (!socket.rooms.has(NOMBRE_SALA) || !datos) return;
+        // El id lo pone el SERVIDOR (no se confía en el cliente, evita suplantación)
+        // y los valores se acotan/sanitizan antes de reenviar.
+        socket.to(NOMBRE_SALA).emit('datos_companeros', {
+            id: socket.id,
+            x: clamp(datos.x, 0, 1),
+            y: clamp(datos.y, 0, 1),
+            apertura: clamp(datos.apertura, 0, 1),
+            pinch: !!datos.pinch,
+            instrumento: String(datos.instrumento || 'theremin').slice(0, 20)
+        });
     });
 
     socket.on('disconnect', () => {
@@ -53,7 +76,7 @@ io.on('connection', (socket) => {
 });
 
 // 5. Iniciar el servidor
-const PUERTO = 3000;
+const PUERTO = process.env.PORT || 3000;
 server.listen(PUERTO, () => {
     console.log(`🚀 Servidor activo en http://localhost:${PUERTO}`);
     console.log(`Presiona Ctrl + C en esta terminal para detenerlo.`);

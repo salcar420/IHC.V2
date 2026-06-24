@@ -16,9 +16,9 @@
     <div class="container">
         <h1>AirTheremin</h1>
         <div class="controls">
-            <button id="startBtn">Instrumento Listo</button>
-            <button id="modeBtn" style="background-color: #28a745; color: white; border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; margin-left: 10px;">Modo: SOLO</button>
-            <select id="instrumentoSel" style="padding: 12px 18px; border-radius: 30px; font-weight: bold; cursor: pointer; margin-left: 10px; background-color: #0f3460; color: white; border: none;">
+            <button id="startBtn" aria-pressed="false">Instrumento Listo</button>
+            <button id="modeBtn" class="btn-pill btn-green" aria-pressed="false" aria-label="Modo solo o grupal">Modo: SOLO</button>
+            <select id="instrumentoSel" class="btn-pill btn-blue" aria-label="Instrumento">
                 <optgroup label="Sintetizados (continuos)">
                     <option value="theremin">Theremin</option>
                     <option value="bajo">Bajo synth</option>
@@ -29,23 +29,26 @@
                     <option value="guitarra">Guitarra acústica</option>
                 </optgroup>
             </select>
-            <select id="escalaSel" class="escala-select">
+            <select id="escalaSel" class="escala-select" aria-label="Escala musical">
                 <option value="cromatica">Escala: Libre</option>
                 <option value="pentatonica">Escala: Pentatónica</option>
                 <option value="mayor">Escala: Do Mayor</option>
                 <option value="menor">Escala: La Menor</option>
                 <option value="blues">Escala: Blues</option>
             </select>
+            <button id="mirrorBtn" class="btn-pill btn-blue" aria-pressed="true" aria-label="Activar o desactivar espejo">🪞 Espejo: ON</button>
         </div>
         <div class="controls" style="margin-top: 8px;">
             <button id="leccionBtn" class="leccion-btn">🎓 Iniciar Lección</button>
-            <select id="cancionSel" class="cancion-select">
+            <select id="cancionSel" class="cancion-select" aria-label="Canción de la lección">
                 <option value="twinkle">Estrellita</option>
                 <option value="mary">Mary Had a Little Lamb</option>
                 <option value="alegria">Himno a la Alegría</option>
                 <option value="cumpleanos">Cumpleaños Feliz</option>
             </select>
+            <button id="csvBtn" class="btn-pill btn-slate" aria-label="Exportar métricas a CSV">⬇ CSV</button>
         </div>
+        <p class="hint">Sin cámara o sin manos libres: usa las teclas <kbd>1</kbd>–<kbd>7</kbd> para tocar las notas de la escala.</p>
         <div class="canvas-container">
             <video id="input_video" hidden></video>
             <canvas id="output_canvas" width="800" height="500"></canvas>
